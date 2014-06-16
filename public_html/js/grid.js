@@ -12,7 +12,7 @@ var Grid = Class.extend({
             {
                 for (var x=0; x<gridSize; x++)
                     {
-                        this.list.push(new Tile(gameWidth-(gameWidth-space-space*x-tileSize*x), gameHeight+((gameHeight-(tileSize*gridSize+(gridSize-1)*space))/2)-(gameHeight-space-space*y-tileSize*y)));
+                        this.list.push(new Tile(gameWidth-(gameWidth-space-space*x-tileSize*x), gameHeight+((gameHeight-(tileSize*gridSize+(gridSize-1)*space))/2)-(gameHeight-space-space*y-tileSize*y)-gameHeight/20));
                         console.log(this.list);
                     }
             }

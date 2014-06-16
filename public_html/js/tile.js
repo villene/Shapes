@@ -12,7 +12,7 @@ var Tile = Class.extend({
         this.sprite.inputEnabled = true;
         this.sprite.events.onInputOver.add(this.mouseOver, this);
         this.sprite.events.onInputOut.add(this.mouseOut, this);
-        this.sprite.events.onInputDown.add(this.destroy, this);
+        this.sprite.events.onInputDown.add(this.correctCheck, this);
         this.assignShape(x, y);
     }
     
@@ -26,6 +26,11 @@ var Tile = Class.extend({
         this.shape.frame=rnd;
         this.shape.height=tileSize;
         this.shape.width = tileSize;
+    }
+    
+    ,correctCheck: function(){
+        if (this.shape.frame===correctShape.group.children[1].frame)
+            correctShape.hide();
     }
     ,mouseOver: function(){
         this.sprite.frame=1;

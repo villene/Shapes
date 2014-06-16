@@ -1,4 +1,4 @@
-var game, tileSize, grid;
+var game, tileSize, grid, correctShape;
 var gameWidth = CONFIG.gameWidth;
 var gameHeight = CONFIG.gameHeight;
 
@@ -9,11 +9,13 @@ var main_state = {
         this.game.stage.backgroundColor = '#71c5cf';
         this.game.load.spritesheet('tile', 'assets/tile.png', 100, 100, 2);
         this.game.load.spritesheet('black', 'assets/black.png', 100, 100, 4);
+        this.game.load.image('shapebg', 'assets/shapebg.png');
     }
     
     ,create: function(){
-        
+        correctShape = new Shape();
         grid = new Grid(CONFIG.levels[0].gridSize);
+        
     }
 }
 
