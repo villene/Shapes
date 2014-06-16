@@ -1,15 +1,18 @@
 var shapeData = Class.extend({
-    init: function(){
-        this.list = [];        
-        this.chooseShapes();
+    init: function(level){
+        this.list = [];
+        gameColours = this.shapeColours(level.colours);
+        console.log(gameColours);
+        this.chooseShapes(level);
     }
     
-    ,chooseShapes: function(){
+    ,chooseShapes: function(level){
         var check;
-        for (var i=0, l=CONFIG.levels[0].gridSize*CONFIG.levels[0].gridSize; i<l; i++)
+        
+        for (var i=0, l=level.gridSize*level.gridSize; i<l; i++)
             {
                 check = false;
-                var rnd = game.rnd.integerInRange(0, CONFIG.levels[0].shapeCount-1);
+                var rnd = game.rnd.integerInRange(0, level.shapeCount-1);
                 for (var j = 0, s = this.list.length; j<s; j++)
                     {
                         if (rnd === this.list[j]) check = true;                        
@@ -17,6 +20,24 @@ var shapeData = Class.extend({
                 if (check) i--;
                 else this.list[i] = rnd;
             }            
+    }
+    ,shapeColours: function(colourCount){
+        var check;
+        
+        var newColours = [];
+        
+        for (var i=0; i<colourCount; i++)
+            {
+                check = false;
+                var rnd = game.rnd.integerInRange(0, colourArray.length-1);
+                for (var j = 0, s = newColours.length; j<s; j++)
+                    {
+                        if (rnd === newColours[j]) check = true;                        
+                    }
+                if (check) i--;
+                else newColours[i] = rnd;
+            } 
+        return newColours;
     }
     ,destroy: function(){
         

@@ -1,7 +1,10 @@
 var Grid = Class.extend({
-    init: function(gridSize){
-        this.list = [];
-        this.createTiles(gridSize);
+    init: function(level){
+        shapes = new shapeData(level);
+        correctShape = new Shape();
+        
+        this.list = [];        
+        this.createTiles(level.gridSize);
     }
     
     ,createTiles: function(gridSize){
@@ -18,15 +21,6 @@ var Grid = Class.extend({
             }
     }
     
-    ,checkRepeat: function(nr){
-        var result = false
-        for (var i=0, l=this.list.length; i<l; i++)
-            {
-                if (nr===this.list[i].shape.frame)
-                    result = true;                
-            }
-        return result;
-    }
     //destroy probalby needs some pimpin'
     ,destroy: function(){
         for(var i=0; i<this.list.length; i++){

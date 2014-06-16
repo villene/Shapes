@@ -1,4 +1,5 @@
-var game, tileSize, grid, correctShape, shapes;
+var game, tileSize, grid, correctShape, shapes, gameColours;
+var colourArray = ['black', 'red', 'yellow'];
 var gameWidth = CONFIG.gameWidth;
 var gameHeight = CONFIG.gameHeight;
 
@@ -9,28 +10,14 @@ var main_state = {
         this.game.stage.backgroundColor = '#71c5cf';
         this.game.load.spritesheet('tile', 'assets/tile.png', 100, 100, 2);
         this.game.load.spritesheet('black', 'assets/black.png', 100, 100, 4);
+        this.game.load.spritesheet('red', 'assets/red.png', 100, 100, 4);
+        this.game.load.spritesheet('yellow', 'assets/yellow.png', 100, 100, 4);
         this.game.load.image('shapebg', 'assets/shapebg.png');
     }
     
     ,create: function(){
-        shapes = new shapeData();
-        correctShape = new Shape();
-        grid = new Grid(CONFIG.levels[0].gridSize);
         
-    }
-    ,chooseShapes: function(){
-        this.list = [];
-        var rnd;
-        for (var i=0, l=CONFIG.levels[0].gridSize*CONFIG.levels[0].gridSize; i<l; i++)
-            {
-                rnd = game.rnd.integerInRange(0, CONFIG.levels[0].shapeCount-1);
-                for (var j = 0, s = this.list.length; j<s; j++)
-                    {
-                        if (rnd === this.list[i]) rnd = game.rnd.integerInRange(0, CONFIG.levels[0].shapeCount-1);
-                        else this.list[i]=rnd;
-                    }                              
-            }
-        return this.list;
+        grid = new Grid(CONFIG.levels[0]);        
     }
 }
 
