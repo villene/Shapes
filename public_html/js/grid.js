@@ -18,9 +18,20 @@ var Grid = Class.extend({
             }
     }
     
-    ,destroy:function(){
+    ,checkRepeat: function(nr){
+        var result = false
+        for (var i=0, l=this.list.length; i<l; i++)
+            {
+                if (nr===this.list[i].shape.frame)
+                    result = true;                
+            }
+        return result;
+    }
+    //destroy probalby needs some pimpin'
+    ,destroy: function(){
         for(var i=0; i<this.list.length; i++){
-            this.list[i].destroy(true);
+            this.list[i].destroy();
         }
+        this.list = undefined;
     }
 })

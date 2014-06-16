@@ -8,10 +8,24 @@ var Tile = Class.extend({
         this.sprite = game.add.sprite(x, y, 'tile');
         this.sprite.frame=0
         this.sprite.height=tileSize;
-        this.sprite.width=tileSize;
+        this.sprite.width=tileSize;        
         this.sprite.inputEnabled = true;
         this.sprite.events.onInputOver.add(this.mouseOver, this);
         this.sprite.events.onInputOut.add(this.mouseOut, this);
+        this.sprite.events.onInputDown.add(this.destroy, this);
+        this.assignShape(x, y);
+    }
+    
+    ,assignShape: function(x,y){                
+        this.shape = game.add.sprite(x, y, 'black');        
+        var rnd = game.rnd.integerInRange(0, 3);
+//        while(grid.checkRepeat(rnd)===true){
+//        //this.checkRepeat
+//        rnd = game.rnd.integerInRange(0, 3);
+//        }
+        this.shape.frame=rnd;
+        this.shape.height=tileSize;
+        this.shape.width = tileSize;
     }
     ,mouseOver: function(){
         this.sprite.frame=1;
@@ -21,5 +35,6 @@ var Tile = Class.extend({
     }
     ,destroy: function(){
         this.sprite.destroy();
+        this.shape.destroy();
     }
 })
