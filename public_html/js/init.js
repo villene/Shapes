@@ -1,4 +1,4 @@
-var game, tileSize, grid, correctShape;
+var game, tileSize, grid, correctShape, shapes;
 var gameWidth = CONFIG.gameWidth;
 var gameHeight = CONFIG.gameHeight;
 
@@ -13,9 +13,24 @@ var main_state = {
     }
     
     ,create: function(){
+        shapes = new shapeData();
         correctShape = new Shape();
         grid = new Grid(CONFIG.levels[0].gridSize);
         
+    }
+    ,chooseShapes: function(){
+        this.list = [];
+        var rnd;
+        for (var i=0, l=CONFIG.levels[0].gridSize*CONFIG.levels[0].gridSize; i<l; i++)
+            {
+                rnd = game.rnd.integerInRange(0, CONFIG.levels[0].shapeCount-1);
+                for (var j = 0, s = this.list.length; j<s; j++)
+                    {
+                        if (rnd === this.list[i]) rnd = game.rnd.integerInRange(0, CONFIG.levels[0].shapeCount-1);
+                        else this.list[i]=rnd;
+                    }                              
+            }
+        return this.list;
     }
 }
 

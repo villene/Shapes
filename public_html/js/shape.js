@@ -13,7 +13,7 @@ var Shape = Class.extend({
        
        var correct = game.add.sprite(gameWidth/2, gameHeight - gameHeight/10, 'black');
        correct.anchor.setTo(0.5, 0.5);
-       correct.frame = game.rnd.integerInRange(0, 3);
+       correct.frame = game.rnd.integerInRange(0, shapes.list.length);
        this.group.add(correct);
     }
     

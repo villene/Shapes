@@ -17,15 +17,11 @@ var Tile = Class.extend({
     }
     
     ,assignShape: function(x,y){                
-        this.shape = game.add.sprite(x, y, 'black');        
-        var rnd = game.rnd.integerInRange(0, 3);
-//        while(grid.checkRepeat(rnd)===true){
-//        //this.checkRepeat
-//        rnd = game.rnd.integerInRange(0, 3);
-//        }
-        this.shape.frame=rnd;
+        this.shape = game.add.sprite(x, y, 'black');    
+        this.shape.frame=shapes.list[0];
         this.shape.height=tileSize;
         this.shape.width = tileSize;
+        shapes.list.splice(0,1);
     }
     
     ,correctCheck: function(){
