@@ -1,6 +1,12 @@
 var shapeData = Class.extend({
     init: function(level){
         this.list = [];
+        for (var i=0, l=level.gridSize*level.gridSize; i<l; i++)
+        {
+            this.list[i] = {
+                shapeFrame: null, shapeCol: null
+            }
+        }
         gameColours = this.shapeColours(level.colours);
         console.log(gameColours);
         this.chooseShapes(level);
@@ -12,13 +18,17 @@ var shapeData = Class.extend({
         for (var i=0, l=level.gridSize*level.gridSize; i<l; i++)
             {
                 check = false;
-                var rnd = game.rnd.integerInRange(0, level.shapeCount-1);
+                var rndCnt = game.rnd.integerInRange(0, level.shapeCount-1);
+                var rndCol = game.rnd.integerInRange(0, level.colours-1);
                 for (var j = 0, s = this.list.length; j<s; j++)
                     {
-                        if (rnd === this.list[j]) check = true;                        
+                        if (rndCnt === this.list[j].shapeFrame && rndCol === this.list[j].shapeCol) check = true;                        
                     }
                 if (check) i--;
-                else this.list[i] = rnd;
+                else {
+                    this.list[i].shapeFrame = rndCnt;
+                    this.list[i].shapeCol = rndCol;
+                }
             }            
     }
     ,shapeColours: function(colourCount){

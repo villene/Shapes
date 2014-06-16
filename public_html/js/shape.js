@@ -1,5 +1,5 @@
 var Shape = Class.extend({
-    init: function(){
+    init: function(){        
         this.group = game.add.group();
         this.draw();
         this.show();
@@ -11,9 +11,11 @@ var Shape = Class.extend({
        bg.width = gameWidth;
        this.group.add(bg);
        
-       var correct = game.add.sprite(gameWidth/2, gameHeight - gameHeight/10, colourArray[gameColours[game.rnd.integerInRange(0, gameColours.length-1)]]);
+       var rnd = grid.list[game.rnd.integerInRange(0, grid.list.length)].shape;
+       console.log(rnd);
+       var correct = game.add.sprite(gameWidth/2, gameHeight - gameHeight/10, rnd.key);
        correct.anchor.setTo(0.5, 0.5);
-       correct.frame = game.rnd.integerInRange(0, shapes.list.length);
+       correct.frame = rnd.frame;
        this.group.add(correct);
     }
     

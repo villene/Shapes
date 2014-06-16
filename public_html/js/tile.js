@@ -17,15 +17,15 @@ var Tile = Class.extend({
     }
     
     ,assignShape: function(x,y){                
-        this.shape = game.add.sprite(x, y, 'black');    
-        this.shape.frame=shapes.list[0];
+        this.shape = game.add.sprite(x, y, colourArray[gameColours[shapes.list[0].shapeCol]]);    
+        this.shape.frame=shapes.list[0].shapeFrame;
         this.shape.height=tileSize;
         this.shape.width = tileSize;
         shapes.list.splice(0,1);
     }
     
     ,correctCheck: function(){
-        if (this.shape.frame===correctShape.group.children[1].frame)
+        if (this.shape.frame===correctShape.group.children[1].frame && this.shape.key===correctShape.group.children[1].key)
             correctShape.hide();
     }
     ,mouseOver: function(){

@@ -17,7 +17,8 @@ var main_state = {
     
     ,create: function(){
         
-        grid = new Grid(CONFIG.levels[0]);        
+        grid = new Grid(CONFIG.levels[0]);
+        correctShape = new Shape();
     }
 }
 
