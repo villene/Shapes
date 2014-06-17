@@ -7,7 +7,7 @@ var Tile = Class.extend({
     
     ,draw: function(x,y){
         this.sprite = game.add.sprite(x, y, 'tile');
-        this.sprite.frame=0
+        this.sprite.frame=0;
         this.sprite.height=tileSize;
         this.sprite.width=tileSize;        
 //        this.sprite.inputEnabled = true;

@@ -6,7 +6,7 @@ var Shape = Class.extend({
     }
     
     ,draw: function(){
-        this.group.y=gameHeight;
+       this.group.y=gameHeight;
        var bg = game.add.sprite(0, gameHeight - gameHeight/5, 'shapebg');
        bg.height = gameHeight/5;
        bg.width = gameWidth;
