@@ -21,6 +21,25 @@ var Grid = Class.extend({
                     }
             }
     }
+    ,showTiles: function(level){
+        var revealOrder = [];
+        for (var i=0, l=level.gridSize*level.gridSize; i<l; i++)
+            {
+                var rnd = game.rnd.integerInRange(0, l-1);
+                while(this.list[rnd].showed){
+                    rnd = game.rnd.integerInRange(0, l-1);
+                }
+                revealOrder[i] = rnd;
+                this.list[rnd].showed=true;
+            }
+        console.log(revealOrder);
+        for(var i=0, l=this.list.length; i<l; i++) //console.log(this.list[revealOrder[i]]);
+         game.time.events.add(level.showTime+i*level.showTime, this.list[revealOrder[i]].show, this.list[revealOrder[i]]);
+     
+         game.time.events.add(level.showTime*(this.list.length+1), correctShape.show, correctShape);
+         
+    }
+    
     
     //destroy probalby needs some pimpin'
     ,destroy: function(){

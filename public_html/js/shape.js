@@ -2,10 +2,11 @@ var Shape = Class.extend({
     init: function(){        
         this.group = game.add.group();
         this.draw();
-        this.show();
+        //this.show();
     }
     
     ,draw: function(){
+        this.group.y=gameHeight;
        var bg = game.add.sprite(0, gameHeight - gameHeight/5, 'shapebg');
        bg.height = gameHeight/5;
        bg.width = gameWidth;
@@ -20,8 +21,13 @@ var Shape = Class.extend({
     }
     
     ,show: function(){
-        this.group.y = gameHeight;
+        //this.group.y = gameHeight;
         game.add.tween(this.group).to({y: 0}, 500).start();
+        this.enableInput();
+    }
+    ,enableInput: function(){
+        for(var i=0, l=grid.list.length; i<l; i++)
+            grid.list[i].enableInput();
     }
     
     ,hide: function(){

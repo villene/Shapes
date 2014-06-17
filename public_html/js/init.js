@@ -1,4 +1,4 @@
-var game, tileSize, grid, correctShape, shapes, gameColours;
+var game, tileSize, grid, correctShape, shapes, gameColours, currLvl;
 var colourArray = ['black', 'red', 'yellow'];
 var gameWidth = CONFIG.gameWidth;
 var gameHeight = CONFIG.gameHeight;
@@ -16,9 +16,10 @@ var main_state = {
     }
     
     ,create: function(){
-        
-        grid = new Grid(CONFIG.levels[0]);
+        currLvl = CONFIG.levels[0];
+        grid = new Grid(currLvl);
         correctShape = new Shape();
+        grid.showTiles(currLvl);
     }
 }
 
