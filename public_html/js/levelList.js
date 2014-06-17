@@ -4,6 +4,16 @@ var levelList = Class.extend({
         this.list=[];
         
         this.draw();
+        
+        this.nextButton = game.add.button(gameWidth-35, gameHeight-35, 'arrows', this.nextPage, this, 1, 1);
+        this.nextButton.width=70;
+        this.nextButton.height=70;
+        this.nextButton.anchor.setTo(0.5,0.5);
+        
+        this.prevButton = game.add.button(35, gameHeight-35, 'arrows', this.prevPage, this, 0);
+        this.prevButton.width=70;
+        this.prevButton.height=70;
+        this.prevButton.anchor.setTo(0.5,0.5);
     }
     ,draw: function(){
         var space = gameWidth/20;
@@ -26,10 +36,11 @@ var levelList = Class.extend({
         }
     }
     ,nextPage: function(){
-        //this.group.x = -gameWidth;
+        
         game.add.tween(this.group).to({x: this.group.x-gameWidth}, 500).start();
     }
     ,prevPage: function(){
+        if(this.group.x!=0)
         game.add.tween(this.group).to({x: this.group.x+gameWidth}, 500).start();
     }
     ,destroy: function(){

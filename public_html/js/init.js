@@ -13,6 +13,7 @@ var boot_state = {
         this.game.load.spritesheet('red', 'assets/red.png', 100, 100, 4);
         this.game.load.spritesheet('yellow', 'assets/yellow.png', 100, 100, 4);
         this.game.load.spritesheet('lvlbg', 'assets/lvlbg.png', 100, 100, 2);
+        this.game.load.spritesheet('arrows', 'assets/arrows.png', 200, 252, 2);
         this.game.load.image('shapebg', 'assets/shapebg.png');
         
     }
@@ -33,6 +34,17 @@ var main_state = {
 var level_select = {
     create: function(){
         levelData = new levelList();
+        
+//        var nextPage = this.game.add.button(gameWidth-35, gameHeight-35, 'arrows', levelData.nextPage, levelData, 1, 1);
+//        nextPage.width=70;
+//        nextPage.height=70;
+//        nextPage.anchor.setTo(0.5,0.5);
+//        
+//        var prevPage = this.game.add.button(35, gameHeight-35, 'arrows', levelData.prevPage, levelData, 0);
+//        prevPage.width=70;
+//        prevPage.height=70;
+//        prevPage.anchor.setTo(0.5,0.5);
+        
     }
 }
 
