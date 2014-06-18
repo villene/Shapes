@@ -9,11 +9,7 @@ var Tile = Class.extend({
         this.sprite = game.add.sprite(x, y, 'tile');
         this.sprite.frame=0;
         this.sprite.height=tileSize;
-        this.sprite.width=tileSize;        
-//        this.sprite.inputEnabled = true;
-//        this.sprite.events.onInputOver.add(this.mouseOver, this);
-//        this.sprite.events.onInputOut.add(this.mouseOut, this);
-//        this.sprite.events.onInputDown.add(this.correctCheck, this);
+        this.sprite.width=tileSize;       
         this.assignShape(x, y);
     }
     ,enableInput: function(){
@@ -22,7 +18,9 @@ var Tile = Class.extend({
         this.sprite.events.onInputOut.add(this.mouseOut, this);
         this.sprite.events.onInputDown.add(this.correctCheck, this);
     }
-    
+    ,disableInput: function(){
+        this.sprite.inputEnabled = false;
+    }    
     ,assignShape: function(x,y){                
         this.shape = game.add.sprite(x, y, colourArray[gameColours[shapes.list[0].shapeCol]]);    
         this.shape.frame=shapes.list[0].shapeFrame;
@@ -38,22 +36,36 @@ var Tile = Class.extend({
         console.log('yay! ' + this.shape.frame);
     }
     ,hide: function(){
-        this.shape.alpha=0;
+        if(this.shape.frame!==checkMarkSprite)this.shape.alpha=0;
+        else this.shape.alpha=1;        
     }
     
     ,correctCheck: function(){
         this.show();
         if (this.shape.frame===correctShape.group.children[1].frame && this.shape.key===correctShape.group.children[1].key)
             {
-                correctShape.hide();                
-                grid.HUD.timer.stop();
-                currRound++;
-                grid.destroy();
-                if (currRound<=3) {
-                    grid = new Grid(currLvl);                    
-                    grid.showTiles(currLvl);
+                if(grid.correctShapes<currLvl.correctShapes)
+                    {
+                        grid.correctShapes++;
+                        this.shape.frame=checkMarkSprite;
+                        this.sprite.frame=0;                        
+                        this.disableInput();
+                        correctShape.hide();
+                        correctShape = new Shape(grid.list);
+                        correctShape.show();                       
+                    }
+                else{
+                    correctShape.hide();                
+                    grid.HUD.timer.stop();
+                    currRound++;
+                    grid.destroy();
+                    if (currRound<=3) {
+                        grid = new Grid(currLvl);                    
+                        grid.showTiles(currLvl);
+                    }
+                    else game.state.start('levels');
                 }
-                else game.state.start('levels');
+                this.shape.alpha=1;
             }
         else{
             grid.HUD.updateTries();

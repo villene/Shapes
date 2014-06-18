@@ -1,7 +1,7 @@
 var Grid = Class.extend({
     init: function(level){        
         shapes = new shapeData(level);
-        
+        this.correctShapes=1;
         
         this.list = [];        
         this.createTiles(level.gridSize);

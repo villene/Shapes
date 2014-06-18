@@ -12,8 +12,13 @@ var Shape = Class.extend({
        bg.width = gameWidth;
        this.group.add(bg);
        
-       var rnd = list[game.rnd.integerInRange(0, list.length-1)].shape;
-       console.log(rnd);
+       var rnd;
+       do{
+       rnd = list[game.rnd.integerInRange(0, list.length-1)].shape;
+       } while(rnd.frame===checkMarkSprite);
+       console.log('rnd='+rnd.frame);
+      
+       
        var correct = game.add.sprite(gameWidth/2, gameHeight - gameHeight/10, rnd.key);
        correct.anchor.setTo(0.5, 0.5);
        correct.frame = rnd.frame;
@@ -24,12 +29,12 @@ var Shape = Class.extend({
         //this.group.y = gameHeight;
         var tween = game.add.tween(this.group).to({y: 0}, 500).start();
         tween.onComplete.add(this.enableInput, this);
-        tween.onComplete.add(grid.HUD.startCountdown, grid.HUD);
+        if (grid.correctShapes===1) tween.onComplete.add(grid.HUD.startCountdown, grid.HUD);
         
     }
     ,enableInput: function(){
         for(var i=0, l=grid.list.length; i<l; i++)
-            grid.list[i].enableInput();
+            if(grid.list[i].shape.frame!==checkMarkSprite) grid.list[i].enableInput();
     }
     
     ,hide: function(){

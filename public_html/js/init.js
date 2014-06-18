@@ -2,6 +2,7 @@ var game, tileSize, grid, correctShape, shapes, currLvl, levelData, currRound;
 var colourArray = ['black', 'red', 'yellow'];
 var gameWidth = CONFIG.gameWidth;
 var gameHeight = CONFIG.gameHeight;
+var checkMarkSprite=4;
 
 game = new Phaser.Game(gameWidth, gameHeight, Phaser.AUTO, 'phaser'); //{preload: preload, create: create});
 
@@ -9,9 +10,9 @@ var boot_state = {
     preload: function(){
         this.game.stage.backgroundColor = '#71c5cf';
         this.game.load.spritesheet('tile', 'assets/tile.png', 100, 100, 2);
-        this.game.load.spritesheet('black', 'assets/black.png', 100, 100, 4);
-        this.game.load.spritesheet('red', 'assets/red.png', 100, 100, 4);
-        this.game.load.spritesheet('yellow', 'assets/yellow.png', 100, 100, 4);
+        this.game.load.spritesheet('black', 'assets/black.png', 100, 100, 5);
+        this.game.load.spritesheet('red', 'assets/red.png', 100, 100, 5);
+        this.game.load.spritesheet('yellow', 'assets/yellow.png', 100, 100, 5);
         this.game.load.spritesheet('lvlbg', 'assets/lvlbg.png', 100, 100, 2);
         this.game.load.spritesheet('arrows', 'assets/arrows.png', 200, 252, 2);
         this.game.load.image('shapebg', 'assets/shapebg.png');
