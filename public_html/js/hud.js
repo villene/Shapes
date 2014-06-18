@@ -34,10 +34,15 @@ var hud = Class.extend({
             this.time--;
             this.timeCounter.setText('Time\n'+this.time);
         }
-        else{
+        else{            
             this.timer.stop();           
+            currRound++;
             grid.destroy();
-            game.state.start('levels');
+            if (currRound<=3) {
+                grid = new Grid(currLvl);                    
+                grid.showTiles(currLvl);
+            }
+            else game.state.start('levels');
         }
         
     }

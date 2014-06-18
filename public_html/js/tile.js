@@ -45,7 +45,7 @@ var Tile = Class.extend({
         this.show();
         if (this.shape.frame===correctShape.group.children[1].frame && this.shape.key===correctShape.group.children[1].key)
             {
-                correctShape.hide();
+                correctShape.hide();                
                 grid.HUD.timer.stop();
                 currRound++;
                 grid.destroy();
