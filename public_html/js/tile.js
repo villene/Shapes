@@ -44,7 +44,24 @@ var Tile = Class.extend({
     ,correctCheck: function(){
         this.show();
         if (this.shape.frame===correctShape.group.children[1].frame && this.shape.key===correctShape.group.children[1].key)
-            correctShape.hide();
+            {
+                correctShape.hide();
+                grid.HUD.timer.stop();
+                currRound++;
+                grid.destroy();
+                if (currRound<=3) {
+                    grid = new Grid(currLvl);                    
+                    grid.showTiles(currLvl);
+                }
+                else game.state.start('levels');
+            }
+        else{
+            grid.HUD.updateTries();
+            if (grid.HUD.tries===0) {
+                grid.destroy();                
+                game.state.start('levels');
+            }
+        }
     }
     ,mouseOver: function(){
         this.sprite.frame=1;

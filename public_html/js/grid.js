@@ -1,11 +1,11 @@
 var Grid = Class.extend({
-    init: function(level){
+    init: function(level){        
         shapes = new shapeData(level);
         
         
         this.list = [];        
         this.createTiles(level.gridSize);
-        
+        this.HUD = new hud();
     }
     
     ,createTiles: function(gridSize){
@@ -20,6 +20,7 @@ var Grid = Class.extend({
                         console.log(this.list);
                     }
             }
+            correctShape = new Shape(this.list);
     }
     ,showTiles: function(level){
         var revealOrder = [];
@@ -43,6 +44,8 @@ var Grid = Class.extend({
     
     //destroy probalby needs some pimpin'
     ,destroy: function(){
+        this.HUD.destroy();
+        correctShape.destroy();
         for(var i=0; i<this.list.length; i++){
             this.list[i].destroy();
         }

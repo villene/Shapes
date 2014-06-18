@@ -2,6 +2,8 @@ var levelList = Class.extend({
     init: function(){
         this.group = game.add.group();
         this.list=[];
+        this.pageCount = Math.ceil(CONFIG.levels.length/12);
+        this.currPage=1;
         
         this.draw();
         
@@ -20,7 +22,7 @@ var levelList = Class.extend({
         var count = 0;
         //console.log(space);
         var levelTileSize = (gameWidth-4*space) / 3;
-        for (var i=0, l=Math.ceil(CONFIG.levels.length/12); i<l; i++){        
+        for (var i=0; i<this.pageCount; i++){        
             for (var y=0; y<4; y++)
                 {
                     for (var x=0; x<3; x++)
@@ -36,17 +38,22 @@ var levelList = Class.extend({
         }
     }
     ,nextPage: function(){
-        
-        game.add.tween(this.group).to({x: this.group.x-gameWidth}, 500).start();
+        if(this.currPage<this.pageCount){
+            this.currPage++;
+            game.add.tween(this.group).to({x: this.group.x-gameWidth}, 500).start();     
+        }        
     }
     ,prevPage: function(){
-        if(this.group.x!=0)
-        game.add.tween(this.group).to({x: this.group.x+gameWidth}, 500).start();
+        if(this.currPage>1){
+            this.currPage--;
+            game.add.tween(this.group).to({x: this.group.x+gameWidth}, 500).start();
+        }        
     }
     ,destroy: function(){
         for(var i=0; i<this.list.length; i++){
             this.list[i].destroy();
         }
         this.list = undefined;
+        this.group.destroy();
     }
 })
